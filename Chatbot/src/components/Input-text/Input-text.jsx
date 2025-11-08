@@ -2,8 +2,13 @@ import React from 'react'
 
 export default function InputText() {
     return (
-        <>
-            <h1>hello world</h1>
-        </>
+        <main>
+            <div>
+                <label>
+                    <input type="text" className='textInput' />
+                </label> 
+                <button className='submitBtn'>Submit</button>
+            </div>
+        </main>
     )
 }
