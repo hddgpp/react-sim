@@ -7,7 +7,7 @@ export default function InputText() {
                 <label>
                     <input type="text" className='textInput' />
                 </label> 
-                <button className='submitBtn'>Submit</button>
+                <button className='submitBtn'>Send</button>
             </div>
         </main>
     )
