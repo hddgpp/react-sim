@@ -4,10 +4,12 @@ import InputText from "./components/Input-text/Input-text.jsx";
 export default function App() {
   const chat = [{
     message: 'hello there',
-    sender: 'user'
+    sender: 'user',
+    id: 1
   },{
     message: 'hi how can i help you?',
-    sender: 'robot'
+    sender: 'robot',
+    id: 2
    }
   ]
 
@@ -15,10 +17,12 @@ export default function App() {
     return(
       <Chat 
         message={chatMessages.message}
-        sender={chatMessages.sender}/>
+        sender={chatMessages.sender}
+        key = {chatMessages.id}
+        />
     )
   })
-  
+
   return(
     <>
      <InputText/>
