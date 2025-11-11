@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Chat({sender, message}) {
+const userIcon = '../../../public/user.png'
+const robotIcon = '../../../public/robot.png'
 
-    const userIcon = '../../../public/user.png'
-    const robotIcon = '../../../public/robot.png'
+export default function Chat({sender, message}) {
 
     return(
         <main>
