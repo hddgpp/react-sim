@@ -1,9 +1,7 @@
 import React from 'react'
 
-export default function Chat(props) {
+export default function Chat({sender, message}) {
 
-    const {sender, message} = props
-    
     let icon = '../../../public/user.png'
 
     if(sender === 'robot') {
