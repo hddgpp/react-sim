@@ -4,19 +4,19 @@ export default function Chat(props) {
 
     const message = props.message
     const sender = props.sender
-    let photo
+    let icon
 
     if(sender === 'user') {
-        photo = '../../../public/user.png'
+        icon = '../../../public/user.png'
     } else if(sender === 'robot') {
-        photo = '../../../public/robot.png'
+        icon = '../../../public/robot.png'
     }
 
     return(
         <main>
             <div>
                 {message}
-               <img src={photo} width={50} alt="" />
+               <img src={icon} width={50} alt="" />
             </div>
         </main>
     )
