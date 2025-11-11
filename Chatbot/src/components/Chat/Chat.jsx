@@ -1,15 +1,22 @@
 import React from 'react'
-import user from '../../../public/user.png'
 
 export default function Chat(props) {
 
     const message = props.message
+    const sender = props.sender
+    let photo
+
+    if(sender === 'user') {
+        photo = '../../../public/user.png'
+    } else if(sender === 'robot') {
+        photo = '../../../public/robot.png'
+    }
 
     return(
         <main>
             <div>
                 {message}
-               <img src={user} width={50} alt="" />
+               <img src={photo} width={50} alt="" />
             </div>
         </main>
     )
