@@ -5,8 +5,12 @@ export default function App() {
   return(
     <>
      <InputText/>
-     <Chat message="hello there" sender="user"/>
-     <Chat message="hi how can i help you?" sender="robot"/>
+     <Chat 
+        message="hello there" 
+        sender="user"/>
+     <Chat 
+        message="hi how can i help you?" 
+        sender="robot"/>
     </>
   )
 }
