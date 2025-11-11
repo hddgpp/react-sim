@@ -10,6 +10,7 @@ export default function App() {
     sender: 'robot'
    }
   ]
+
   const chatMessage = chat.map((chatMessages) => {
     return(
       <Chat 
@@ -17,6 +18,7 @@ export default function App() {
         sender={chatMessages.sender}/>
     )
   })
+  
   return(
     <>
      <InputText/>
