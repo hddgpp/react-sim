@@ -10,7 +10,7 @@ export default function Chat({sender, message}) {
             <div>
                 {sender === 'robot' && <img src={robotIcon} width={50} alt="" />}
                 {message}
-               <img src={userIcon} width={50} alt="" />
+                {sender === 'user' && <img src={userIcon} width={50} alt="" />}
             </div>
         </main>
     )
