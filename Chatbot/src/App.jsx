@@ -5,7 +5,7 @@ export default function App() {
   return(
     <>
      <InputText/>
-     <Chat/>
+     <Chat message="hello there"/>
     </>
   )
 }

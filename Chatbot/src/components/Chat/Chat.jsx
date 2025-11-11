@@ -1,11 +1,11 @@
 import React from 'react'
+import user from '../../../public/user.png'
 
 export default function Chat() {
     return(
         <main>
             <div>
-               <p></p>
-               <img src="" alt="" />
+               <img src={user} width={50} alt="" />
             </div>
         </main>
     )
