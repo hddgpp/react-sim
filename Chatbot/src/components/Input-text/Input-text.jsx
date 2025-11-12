@@ -10,7 +10,9 @@ export default function InputText({setSubmit}) {
 
     function sendMessage() {
 
-         if (inputText.trim() === "") return; 
+        if (inputText.trim() === "") return; 
+
+        const response = window.Chatbot.getResponse(inputText)
 
         setSubmit(prev => [
             ...prev,
@@ -18,8 +20,14 @@ export default function InputText({setSubmit}) {
                 message: inputText,
                 sender: 'user',
                 id: crypto.randomUUID()
+            },
+            {
+                message: response,
+                sender: 'robot',
+                id: crypto.randomUUID()
             }
         ])
+        
 
          setInputText("");
     }
