@@ -9,7 +9,9 @@ export default function Chat({sender, message}) {
     return(
             <div className={sender === 'user' ? 'user-container' : 'robot-container'}>
                 {sender === 'robot' && <img src={robotIcon} width={50} alt="" />}
-                {message}
+                <div className='chat-message'>
+                    {message}
+                </div>
                 {sender === 'user' && <img src={userIcon} width={50} alt="" />}
             </div>
     )
