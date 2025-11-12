@@ -46,7 +46,7 @@ export default function InputText({setSubmit}) {
                         />
                 </label> 
                 <button 
-                    className='submitBtn'
+                    className='sendBtn'
                     onClick={sendMessage}
                 >Send</button>
             </div>
