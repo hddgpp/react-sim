@@ -1,4 +1,5 @@
 import React from 'react'
+import './Chat.css'
 
 const userIcon = '../../../public/user.png'
 const robotIcon = '../../../public/robot.png'

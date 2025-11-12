@@ -1,4 +1,5 @@
 import React from 'react'
+import './Input-text.css'
 
 export default function InputText({setSubmit}) {
 
