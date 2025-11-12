@@ -35,7 +35,7 @@ export default function InputText({setSubmit}) {
 
     return (
         <main>
-            <div>
+            <div className='container'>
                 <label>
                     <input 
                         type="text"

@@ -8,3 +8,10 @@
     font-size: 15px;
     cursor: pointer;
 }
+
+.textInput {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border-width: 1px;
+    font-size: 15px;
+}
