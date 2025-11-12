@@ -1,0 +1,10 @@
+.sendBtn {
+    background-color: rgb(25, 135, 84);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
