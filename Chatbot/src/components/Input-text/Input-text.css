@@ -14,4 +14,10 @@
     border-radius: 10px;
     border-width: 1px;
     font-size: 15px;
+
+    flex-grow: 1;
+}
+
+.container {
+    display: flex;
 }

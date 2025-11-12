@@ -34,9 +34,9 @@ export default function InputText({setSubmit}) {
     }
 
     return (
-        <main>
+        
             <div className='container'>
-                <label>
+                
                     <input 
                         type="text"
                         className='textInput'
@@ -44,12 +44,10 @@ export default function InputText({setSubmit}) {
                         value={inputText}
                         onChange={handleChange}
                         />
-                </label> 
                 <button 
                     className='sendBtn'
                     onClick={sendMessage}
                 >Send</button>
             </div>
-        </main>
     )
 }
