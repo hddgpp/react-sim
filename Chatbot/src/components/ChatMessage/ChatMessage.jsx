@@ -4,8 +4,17 @@ import './ChatMessage.css'
 
 export default function ChatMessage({submit}) {
 
+    const chatRef = React.useRef(null);
+
+    React.useEffect(() => {
+        const containerElem = chatRef.current
+        if(containerElem) {
+            containerElem.scrollTop = containerElem.scrollHeight
+        }
+    }, [submit]);
+
     return(
-        <div className='ChatMessage-container'>
+        <div className='ChatMessage-container' ref={chatRef}>
             {submit.map((chatMessage) => {
                 return(
                     <Chat 
