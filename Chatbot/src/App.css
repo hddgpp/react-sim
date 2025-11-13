@@ -1,6 +1,6 @@
 .generale {
   max-width: 800px;
-  margin: 5px auto;
+  margin: 0px auto;
   height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
