@@ -4,7 +4,7 @@ import Chat from './Chat/Chat.jsx'
 export default function ChatMessage({submit}) {
 
     return(
-        <>
+        <div className='ChatMessage-container'>
             {submit.map((chatMessage) => {
                 return(
                     <Chat 
@@ -14,6 +14,6 @@ export default function ChatMessage({submit}) {
                     />
                 )
             })}
-        </>
+        </div>
     )
 }
