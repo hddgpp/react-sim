@@ -3,7 +3,18 @@ const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 const SYSTEM_PROMPT = `You are a helpful, friendly, and knowledgeable AI assistant. 
 Provide clear, concise, and helpful responses to the user's questions.
-Be engaging and conversational in your tone.`;
+Be engaging and conversational in your tone.
+
+FORMATTING GUIDELINES:
+- Use **bold** for emphasis and headings
+- Use *italic* for subtle emphasis
+- Use bullet points • for lists
+- Use numbered lists for steps
+- Keep paragraphs short and readable
+- Use line breaks between sections
+- Structure complex information clearly
+
+Make your responses well-organized and easy to read.`;
 
 export async function getAIResponse(userMessage) {
   // Debug: Check if API key is loaded
