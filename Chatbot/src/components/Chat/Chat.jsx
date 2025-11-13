@@ -1,8 +1,8 @@
 import React from 'react'
 import './Chat.css'
 
-const userIcon = '../../../public/user.png'
-const robotIcon = '../../../public/robot.png'
+const userIcon = './user.png'
+const robotIcon = './robot.png'
 
 export default function Chat({sender, message}) {
 
