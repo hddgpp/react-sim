@@ -3,10 +3,17 @@ const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 const SYSTEM_PROMPT = `You are a helpful, friendly, and knowledgeable AI assistant. 
 Provide clear, concise, and helpful responses to the user's questions.
-Be engaging and conversational in your tone.
-If you don't know something, be honest about it and suggest where they might find the information.`;
+Be engaging and conversational in your tone.`;
 
 export async function getAIResponse(userMessage) {
+  // Debug: Check if API key is loaded
+  console.log("API Key exists:", !!GROQ_API_KEY);
+  console.log("API Key length:", GROQ_API_KEY ? GROQ_API_KEY.length : 0);
+  
+  if (!GROQ_API_KEY || GROQ_API_KEY === 'your_actual_groq_api_key_here') {
+    return "🔑 API key not configured. Please check your .env.local file.";
+  }
+
   try {
     console.log("Sending to Groq AI:", userMessage);
     
@@ -41,34 +48,30 @@ export async function getAIResponse(userMessage) {
 
     clearTimeout(timeoutId);
 
+    console.log("Response status:", response.status);
+    
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Groq API error: ${response.status} - ${errorText}`);
+      console.error("API Error details:", errorText);
+      throw new Error(`API error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
-    console.log("Groq Response:", data);
+    console.log("Groq Response received:", data);
     
     if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-      throw new Error("Invalid response format from Groq API");
+      throw new Error("Invalid response format from API");
     }
     
     return data.choices[0].message.content;
     
   } catch (err) {
-    console.error("AI Error:", err);
+    console.error("AI Error details:", err);
     
     if (err.name === 'AbortError') {
-      return "⏰ I'm taking a bit longer than usual to respond. Please try again!";
+      return "⏰ Request timeout. Please try again!";
     }
     
-    // Friendly fallback responses
-    const fallbackResponses = [
-      "I apologize, but I'm having trouble connecting right now. Could you try asking again in a moment?",
-      "It seems I'm having some technical difficulties. Please try your question again!",
-      "I'm currently experiencing some connection issues. Your message is important - please try again shortly!"
-    ];
-    
-    return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+    return `Error: ${err.message}. Please check the console for details.`;
   }
 }

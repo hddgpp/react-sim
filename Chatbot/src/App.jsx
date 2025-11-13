@@ -4,13 +4,11 @@ import ChatMessage from "./components/ChatMessage/ChatMessage.jsx";
 import './App.css'
 
 export default function App() {
-
-   const [submit, setSubmit] = React.useState([])
-  
+  const [submit, setSubmit] = React.useState([])
 
   return(
     <div className="generale">
-     <ChatMessage submit={submit}/>
+      <ChatMessage submit={submit}/>
       <InputText setSubmit={setSubmit}/>
     </div>
   )
