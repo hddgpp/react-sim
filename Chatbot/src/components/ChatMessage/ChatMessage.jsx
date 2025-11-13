@@ -1,5 +1,6 @@
 import React from 'react'
 import Chat from '../Chat/Chat.jsx'
+import './ChatMessage.css'
 
 export default function ChatMessage({submit}) {
 
