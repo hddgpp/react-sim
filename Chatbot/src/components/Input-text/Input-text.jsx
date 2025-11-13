@@ -2,50 +2,60 @@ import React from 'react'
 import { getAIResponse } from '../../services/ai'
 import './Input-text.css'
 
-export default function InputText({ setSubmit }) {
+export default function InputText({ setSubmit, submit }) {
   const [inputText, setInputText] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
 
+  // Build conversation history for context
+  const buildConversationHistory = () => {
+    return submit.map(chat => ({
+      role: chat.sender === 'user' ? 'user' : 'assistant',
+      content: chat.message
+    }));
+  };
+
   async function handleSendMessage() {
-    if (inputText.trim() === '') return
+    if (inputText.trim() === '' || isLoading) return
 
     setIsLoading(true)
     
-    // Add user message immediately
     const userMessageId = crypto.randomUUID()
+    const userInput = inputText
+
+    // Add user message immediately
     setSubmit(prev => [
       ...prev,
       {
-        message: inputText,
+        message: userInput,
         sender: 'user',
-        id: userMessageId
+        id: userMessageId,
+        timestamp: new Date().toISOString()
       }
     ])
 
-    const userInput = inputText
     setInputText('')
 
     try {
-      // Get AI response
-      const aiResponse = await getAIResponse(userInput)
+      const conversationHistory = buildConversationHistory();
+      const aiResponse = await getAIResponse(userInput, conversationHistory)
       
-      // Add AI response
       setSubmit(prev => [
         ...prev,
         {
           message: aiResponse,
           sender: 'robot',
-          id: crypto.randomUUID()
+          id: crypto.randomUUID(),
+          timestamp: new Date().toISOString()
         }
       ])
     } catch (error) {
-      // Add error message
       setSubmit(prev => [
         ...prev,
         {
-          message: "Sorry, I encountered an error. Please try again.",
+          message: "I encountered an error processing your request. Please try again.",
           sender: 'robot',
-          id: crypto.randomUUID()
+          id: crypto.randomUUID(),
+          timestamp: new Date().toISOString()
         }
       ])
     } finally {
@@ -54,7 +64,7 @@ export default function InputText({ setSubmit }) {
   }
 
   function handleKeyDown(e) {
-    if (e.key === 'Enter' && !isLoading) {
+    if (e.key === 'Enter' && !e.shiftKey && !isLoading) {
       e.preventDefault()
       handleSendMessage()
     }
@@ -62,22 +72,27 @@ export default function InputText({ setSubmit }) {
 
   return (
     <div className='container'>
-      <input
-        type='text'
-        className='textInput'
-        placeholder={isLoading ? "AI is thinking..." : "Ask anything"}
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-        onKeyDown={handleKeyDown}
-        disabled={isLoading}
-      />
-      <button 
-        className='sendBtn' 
-        onClick={handleSendMessage}
-        disabled={isLoading || inputText.trim() === ''}
-      >
-        {isLoading ? '...' : 'Send'}
-      </button>
+      <div className='input-wrapper'>
+        <input
+          type='text'
+          className='textInput'
+          placeholder={isLoading ? "Nova is thinking..." : "Ask me anything in any language..."}
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          onKeyDown={handleKeyDown}
+          disabled={isLoading}
+        />
+        <button 
+          className={`sendBtn ${isLoading ? 'loading' : ''}`}
+          onClick={handleSendMessage}
+          disabled={isLoading || inputText.trim() === ''}
+        >
+          {isLoading ? '⟳' : '↑'}
+        </button>
+      </div>
+      <div className='input-hint'>
+        💬 Supports multiple languages • ✨ Advanced AI • 🔄 Context-aware
+      </div>
     </div>
   )
 }

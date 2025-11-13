@@ -12,3 +12,40 @@ body {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+.chat-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.chat-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.status {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.input-hint {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.sendBtn.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
