@@ -1,4 +1,6 @@
 .ChatMessage-container {
     flex-grow: 1;
     margin-top: 15px;
+    overflow: scroll;
+    scrollbar-width: none;
 }
