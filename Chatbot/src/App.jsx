@@ -4,7 +4,10 @@ import ChatMessage from "./components/ChatMessage/ChatMessage.jsx";
 import './App.css'
 
 export default function App() {
-  const [submit, setSubmit] = React.useState([])
+  const [submit, setSubmit] = React.useState([{
+    sender: 'robot',
+    message: 'Hi im leo, ask me anything!'
+  }])
 
   return(
     <div className="generale">
