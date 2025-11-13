@@ -6,7 +6,7 @@ import './App.css'
 export default function App() {
   const [submit, setSubmit] = React.useState([{
     sender: 'robot',
-    message: 'Hi im leo, ask me anything!'
+    message: 'Hi im Leo, ask me anything!'
   }])
 
   return(
