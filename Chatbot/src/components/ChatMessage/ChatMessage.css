@@ -1,6 +1,22 @@
 .ChatMessage-container {
-    flex-grow: 1;
-    margin-top: 15px;
-    overflow: scroll;
-    scrollbar-width: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ChatMessage-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ChatMessage-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.ChatMessage-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
 }
