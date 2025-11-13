@@ -2,6 +2,9 @@ Leo AI Chatbot - Intelligent Multilingual Assistant
 A sophisticated, AI-powered chatbot built with React and Groq AI. Features multilingual conversations, context-aware responses, and a clean, modern interface.
 
 ![react-sim](https://img.shields.io/badge/React-18.x-blue) ![AI-Powered](https://img.shields.io/badge/AI-Powered-green) ![License](https://img.shields.io/badge/License-MIT-green) ![Status](https://img.shields.io/badge/Status-Live-success)
+
+---
+
 View Live Chatbot [Add your deployment link here]
 
 ✨ Features
