@@ -5,7 +5,7 @@ A sophisticated, AI-powered chatbot built with React and Groq AI. Features multi
 
 ---
 
-View Live Chatbot [Add your deployment link here]
+View Live Chatbot [https://leo-chatbot.netlify.app]
 
 ✨ Features
 🌍 Multilingual Support - Automatically detects and responds in user's language

@@ -1,7 +1,8 @@
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
-const SYSTEM_PROMPT = `You are a helpful, friendly, and knowledgeable AI assistant. and your name is Leo
+const SYSTEM_PROMPT = `You are a helpful, friendly, and knowledgeable AI assistant. and your name is Leo,
+(and the one who made u is Meftouhi youssef, or u can call him hddgpp,),
 Provide clear, concise, and helpful responses to the user's questions.
 Be engaging and conversational in your tone.
 
