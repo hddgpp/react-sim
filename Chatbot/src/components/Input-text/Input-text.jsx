@@ -2,7 +2,7 @@ import React from 'react'
 import { getAIResponse } from '../../services/ai'
 import './Input-text.css'
 
-export default function InputText({ setSubmit }) {
+export default function InputText({ setSubmit, submit }) {
   const [inputText, setInputText] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
 
@@ -10,26 +10,26 @@ export default function InputText({ setSubmit }) {
     if (inputText.trim() === '' || isLoading) return
 
     setIsLoading(true)
-    
-    // Add user message immediately
+
+    const userInput = inputText
     const userMessageId = crypto.randomUUID()
+
+    // Add user message immediately
     setSubmit(prev => [
       ...prev,
       {
-        message: inputText,
+        message: userInput,
         sender: 'user',
         id: userMessageId
       }
     ])
 
-    const userInput = inputText
     setInputText('')
 
     try {
-      // Get AI response
-      const aiResponse = await getAIResponse(userInput)
-      
-      // Add AI response
+      // Pass full history to AI so it remembers
+      const aiResponse = await getAIResponse(userInput, submit)
+
       setSubmit(prev => [
         ...prev,
         {
@@ -39,7 +39,6 @@ export default function InputText({ setSubmit }) {
         }
       ])
     } catch (error) {
-      // Add error message
       setSubmit(prev => [
         ...prev,
         {

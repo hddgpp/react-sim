@@ -12,7 +12,7 @@ export default function App() {
   return(
     <div className="generale">
       <ChatMessage submit={submit}/>
-      <InputText setSubmit={setSubmit}/>
+      <InputText setSubmit={setSubmit} submit={submit}/>
     </div>
   )
 }

@@ -1,36 +1,35 @@
-const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
 
-const SYSTEM_PROMPT = `You are a helpful, friendly, and knowledgeable AI assistant. and your name is Leo,
-(and the one who made u is Meftouhi youssef, or u can call him hddgpp,),
-Provide clear, concise, and helpful responses to the user's questions.
-Be engaging and conversational in your tone.
+const SYSTEM_PROMPT = `
+You are a helpful, friendly AI assistant named **Leo**.
+You were created by Meftouhi Youssef (hddgpp).
 
-FORMATTING GUIDELINES:
-- Use **bold** for emphasis and headings
-- Use *italic* for subtle emphasis
-- Use bullet points • for lists
-- Use numbered lists for steps
-- Keep paragraphs short and readable
-- Use line breaks between sections
-- Structure complex information clearly
+Speak casually, clearly, and keep the vibe friendly.
 
-Make your responses well-organized and easy to read.`;
+Formatting rules:
+- Use **bold** for strong emphasis
+- Use *italic* for soft emphasis
+- Use bullet points
+- Keep responses clean and readable
+- Always return valid markdown
+`
 
-export async function getAIResponse(userMessage) {
-  // Debug: Check if API key is loaded
-  console.log("API Key exists:", !!GROQ_API_KEY);
-  console.log("API Key length:", GROQ_API_KEY ? GROQ_API_KEY.length : 0);
-  
-  if (!GROQ_API_KEY || GROQ_API_KEY === 'your_actual_groq_api_key_here') {
-    return "🔑 API key not configured. Please check your .env.local file.";
+export async function getAIResponse(userMessage, history = []) {
+
+  if (!GROQ_API_KEY) {
+    return "🔑 API key missing. Check your .env.local file."
   }
 
   try {
-    console.log("Sending to Groq AI:", userMessage);
-    
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000);
+    // Format history → convert your submit[] into proper chat model format
+    const formattedHistory = history.map(msg => ({
+      role: msg.sender === 'user' ? 'user' : 'assistant',
+      content: msg.message
+    }))
+
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 30000)
 
     const response = await fetch(GROQ_API_URL, {
       method: 'POST',
@@ -41,49 +40,31 @@ export async function getAIResponse(userMessage) {
       body: JSON.stringify({
         model: "llama-3.1-8b-instant",
         messages: [
-          { 
-            role: "system", 
-            content: SYSTEM_PROMPT 
-          },
-          { 
-            role: "user", 
-            content: userMessage
-          }
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...formattedHistory,
+          { role: 'user', content: userMessage }
         ],
         max_tokens: 1024,
         temperature: 0.7,
         top_p: 0.9,
-        stream: false
       }),
       signal: controller.signal
-    });
+    })
 
-    clearTimeout(timeoutId);
+    clearTimeout(timeoutId)
 
-    console.log("Response status:", response.status);
-    
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("API Error details:", errorText);
-      throw new Error(`API error: ${response.status} - ${errorText}`);
+      const errorText = await response.text()
+      throw new Error(`API error ${response.status}: ${errorText}`)
     }
 
-    const data = await response.json();
-    console.log("Groq Response received:", data);
-    
-    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-      throw new Error("Invalid response format from API");
-    }
-    
-    return data.choices[0].message.content;
+    const data = await response.json()
+    return data.choices[0]?.message?.content || "No response."
     
   } catch (err) {
-    console.error("AI Error details:", err);
-    
     if (err.name === 'AbortError') {
-      return "⏰ Request timeout. Please try again!";
+      return "⏰ Request timed out. Try again."
     }
-    
-    return `Error: ${err.message}. Please check the console for details.`;
+    return `❌ Error: ${err.message}`
   }
 }
